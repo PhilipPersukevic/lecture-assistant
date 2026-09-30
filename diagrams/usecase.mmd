@@ -1,1 +1,41 @@
+flowchart LR
+    Studentas["Studentas"]
+    Destytojas["Dėstytojas"]
 
+    subgraph Sistema["Paskaitų asistentas"]
+        UC1["Įkelti paskaitos vaizdo/garso įrašą"]
+        UC2["Transkribuoti paskaitą"]
+        UC3["Generuoti santrauką"]
+        UC4["Išskirti pagrindines sąvokas"]
+        UC5["Generuoti savitikros klausimus"]
+        UC6["Peržiūrėti transkripciją"]
+        UC7["Peržiūrėti santrauką"]
+        UC8["Peržiūrėti pagrindines sąvokas"]
+        UC9["Peržiūrėti savitikros klausimus"]
+    end
+
+    Whisper["Whisper API"]
+    Gemini["Gemini API"]
+
+    Studentas --> UC1
+    Studentas --> UC6
+    Studentas --> UC7
+    Studentas --> UC8
+    Studentas --> UC9
+
+    Destytojas --> UC1
+    Destytojas --> UC6
+    Destytojas --> UC7
+    Destytojas --> UC8
+    Destytojas --> UC9
+
+    UC1 --> UC2
+    UC2 --> Whisper
+
+    UC2 --> UC3
+    UC2 --> UC4
+    UC2 --> UC5
+
+    UC3 --> Gemini
+    UC4 --> Gemini
+    UC5 --> Gemini
