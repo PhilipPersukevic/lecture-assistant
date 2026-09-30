@@ -1,1 +1,28 @@
+@startuml
+left to right direction
 
+component "Naudotojo sąsaja" as UI
+component "Paskaitų asistento\nbackend" as Backend
+component "Failų valdymas" as Files
+component "Transkripcijos\nmodulis" as Transcription
+component "Whisper API" as Whisper
+component "DI analizės\nmodulis" as AI
+component "Gemini API" as Gemini
+database "Duomenų bazė" as DB
+
+UI --> Backend : HTTP/HTTPS
+Backend --> Files : Įrašų saugojimas
+Backend --> Transcription : Garso/vaizdo apdorojimas
+Transcription --> Whisper : Audio
+Whisper --> Transcription : Transkripcija
+
+Backend --> AI : Transkripcijos tekstas
+AI --> Gemini : Analizės užklausa
+Gemini --> AI : DI rezultatai
+
+Backend --> DB : Išsaugoti duomenis
+DB --> Backend : Nuskaityti duomenis
+
+Backend --> UI : Rezultatai
+
+@enduml
