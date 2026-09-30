@@ -1,1 +1,10 @@
-
+{
+  "santrauka": "Scrum yra lanksti metodika, kurioje darbas vykdomas dviejų savaičių sprintais. Komanda kasdien aptaria pažangą, o sprinto pabaigoje atlieka peržiūrą ir retrospektyvą.",
+  "pagrindines_savokos": ["Sprintas", "Produkto savininkas", "Backlog", "Daily scrum", "Retrospektyva"],
+  "savitikros_klausimai": [
+    "Kokios yra trys pagrindinės Scrum rolės?",
+    "Kiek paprastai trunka sprintas?",
+    "Kas vyksta daily scrum metu?",
+    "Kuo skiriasi sprinto peržiūra nuo retrospektyvos?"
+  ]
+}
