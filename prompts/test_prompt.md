@@ -47,4 +47,4 @@ Reliacinė duomenų bazė saugo duomenis lentelėse, sudarytose iš eilučių ir
 - Išvestis (y): `data/lecture2_output.json`
 
 ## Pokalbio nuoroda
-[Promptas paleistas GPT agentui](ČIA_ĮKLIJUOK_SHARE_NUORODĄ)
+[Promptas paleistas GPT agentui](https://chatgpt.com/share/6abd695f-afa8-83ed-8629-2f338840403a)
