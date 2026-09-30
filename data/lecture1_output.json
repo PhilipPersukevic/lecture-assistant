@@ -1,10 +1,16 @@
 {
-  "santrauka": "Neuroniniai tinklai yra sluoksniuoti modeliai, kurie mokosi koreguodami svorius atgaliniu sklidimu, kad sumažintų nuostolį. Pagrindinė rizika yra persimokymas, kurį mažina validacija ir reguliarizacija.",
-  "pagrindines_savokos": ["Neuronas", "Aktyvacijos funkcija", "Atgalinis sklidimas", "Persimokymas"],
+  "santrauka": "Neuroniniai tinklai yra mašininio mokymosi modeliai, kuriuos sudaro dirbtinių neuronų sluoksniai, apdorojantys informaciją svorių ir aktyvacijos funkcijų pagalba. Mokymosi procesas apima klaidų skaičiavimą bei svorių koregavimą atgalinio sklidimo būdu, o persimokymo problemai spręsti pasitelkiama reguliarizacija.",
+  "pagrindines_savokos": [
+    "Neuroninis tinklas",
+    "Aktyvacijos funkcija",
+    "Atgalinis sklidimas",
+    "Persimokymas",
+    "Reguliarizacija"
+  ],
   "savitikros_klausimai": [
-    "Kokie sluoksniai sudaro neuroninį tinklą?",
-    "Kam naudojama aktyvacijos funkcija?",
-    "Kaip tinklas koreguoja svorius mokymosi metu?",
-    "Kas yra persimokymas ir kaip su juo kovojama?"
+    "Kokie yra pagrindiniai dirbtinio neuroninio tinklo sluoksniai?",
+    "Kaip neuronas apdoroja gaunamus duomenis?",
+    "Kam naudojamas atgalinis sklidimas mokymo metu?",
+    "Kaip galima kovoti su modelio persimokymu?"
   ]
 }
