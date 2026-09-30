@@ -119,4 +119,4 @@ sequenceDiagram
 - `lecture_assistant.ipynb`: Colab prototipas
 
 ## ChatGPT pokalbis
-[Nuoroda į pokalbį](ČIA_ĮKLIJUOK_SHARE_NUORODĄ)
+[Nuoroda į pokalbį](https://chatgpt.com/share/6abd695f-afa8-83ed-8629-2f338840403a)
