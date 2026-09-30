@@ -1,1 +1,24 @@
+flowchart LR
+    UI["Naudotojo sąsaja"]
+    Backend["Paskaitų asistento backend"]
+    Files["Failų valdymas"]
+    Transcription["Transkripcijos modulis"]
+    Whisper["Whisper API"]
+    AI["DI analizės modulis"]
+    Gemini["Gemini API"]
+    DB[("Duomenų bazė")]
 
+    UI -->|HTTP/HTTPS| Backend
+    Backend -->|Įrašų saugojimas| Files
+    Backend -->|Garso/vaizdo apdorojimas| Transcription
+    Transcription -->|Audio| Whisper
+    Whisper -->|Transkripcija| Transcription
+
+    Backend -->|Transkripcijos tekstas| AI
+    AI -->|Analizės užklausa| Gemini
+    Gemini -->|DI rezultatai| AI
+
+    Backend -->|Išsaugoti duomenis| DB
+    DB -->|Nuskaityti duomenis| Backend
+
+    Backend -->|Rezultatai| UI
