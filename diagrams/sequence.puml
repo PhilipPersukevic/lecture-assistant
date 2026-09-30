@@ -1,1 +1,27 @@
+@startuml
+actor "Studentas" as Studentas
+participant "Naudotojo sąsaja" as UI
+participant "Backend" as Backend
+participant "Whisper API" as Whisper
+participant "Gemini API" as Gemini
+database "Duomenų bazė" as DB
 
+Studentas -> UI : Įkelia paskaitos įrašą
+UI -> Backend : Siunčia įrašą
+Backend -> DB : Išsaugo įrašą
+
+Backend -> Whisper : Siunčia garso takelį
+Whisper --> Backend : Grąžina transkripciją
+
+Backend -> DB : Išsaugo transkripciją
+
+Backend -> Gemini : Siunčia transkripciją
+Gemini --> Backend : Grąžina santrauką
+Gemini --> Backend : Grąžina pagrindines sąvokas
+Gemini --> Backend : Grąžina savitikros klausimus
+
+Backend -> DB : Išsaugo DI rezultatus
+Backend --> UI : Grąžina rezultatus
+UI --> Studentas : Parodo transkripciją,\nsantrauką, sąvokas ir klausimus
+
+@enduml
