@@ -1,1 +1,45 @@
+@startuml
+left to right direction
 
+actor "Studentas" as Studentas
+actor "Dėstytojas" as Destytojas
+
+rectangle "Paskaitų asistentas" {
+    usecase "Įkelti paskaitos\nvaizdo/garso įrašą" as UC1
+    usecase "Transkribuoti paskaitą" as UC2
+    usecase "Generuoti santrauką" as UC3
+    usecase "Išskirti pagrindines\nsąvokas" as UC4
+    usecase "Generuoti savitikros\nklausimus" as UC5
+    usecase "Peržiūrėti transkripciją" as UC6
+    usecase "Peržiūrėti santrauką" as UC7
+    usecase "Peržiūrėti pagrindines\nsąvokas" as UC8
+    usecase "Peržiūrėti savitikros\nklausimus" as UC9
+}
+
+rectangle "Whisper API" as Whisper
+rectangle "Gemini API" as Gemini
+
+Studentas --> UC1
+Studentas --> UC6
+Studentas --> UC7
+Studentas --> UC8
+Studentas --> UC9
+
+Destytojas --> UC1
+Destytojas --> UC6
+Destytojas --> UC7
+Destytojas --> UC8
+Destytojas --> UC9
+
+UC1 --> UC2 : <<include>>
+UC2 --> Whisper : <<uses>>
+
+UC3 --> Gemini : <<uses>>
+UC4 --> Gemini : <<uses>>
+UC5 --> Gemini : <<uses>>
+
+UC2 --> UC3 : <<include>>
+UC2 --> UC4 : <<include>>
+UC2 --> UC5 : <<include>>
+
+@enduml
