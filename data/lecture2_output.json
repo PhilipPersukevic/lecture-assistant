@@ -1,1 +1,10 @@
-
+{
+  "santrauka": "Reliacinės duomenų bazės saugo duomenis lentelėse, kurios siejamos raktais ir užklausiamos SQL kalba. Normalizavimas mažina dubliavimą, o transakcijos užtikrina duomenų vientisumą.",
+  "pagrindines_savokos": ["Pirminis raktas", "Išorinis raktas", "JOIN", "Normalizavimas", "Transakcija"],
+  "savitikros_klausimai": [
+    "Kuo skiriasi pirminis ir išorinis raktas?",
+    "Ką daro komanda JOIN?",
+    "Kam reikalingas normalizavimas?",
+    "Ką užtikrina transakcijos?"
+  ]
+}
