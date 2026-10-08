@@ -3,13 +3,13 @@
 Generatyvinio DI projektas apie temą **„Paskaitų asistentas"**. Repozitorijoje du susiję darbai:
 
 - **A dalis:** informacinė sistema, kuri iš paskaitos įrašo sukuria transkripciją (Whisper), santrauką, pagrindines sąvokas ir savitikros klausimus (Gemini API).
-- **B dalis:** duomenų paruošimas iš tikrų paskaitų video: audio → transkripcija ir vidurinis kadras → paveikslėlio aprašymas.
+- **B dalis** (aplankas [`nlp-video-multimodal-extraction/`](nlp-video-multimodal-extraction/)): duomenų paruošimas iš tikrų paskaitų video: audio → transkripcija ir vidurinis kadras → paveikslėlio aprašymas.
 
 ---
 
 ## End-to-end pavyzdžiai: kas yra X ir kas yra y
 
-**X** yra tai, ką pateikiame sistemai (įvestis). **y** yra tai, ką sistema grąžina (išvestis). Poros saugomos `data/` direktorijoje.
+**X** yra tai, ką pateikiame sistemai (įvestis). **y** yra tai, ką sistema grąžina (išvestis). Poros saugomos `data/` direktorijose.
 
 ### A dalis: paskaitos tekstas → santrauka, sąvokos, klausimai
 - **X:** paskaitos transkripcija (`.txt`)
@@ -47,8 +47,8 @@ Iš kiekvieno video fragmento gaunamos dvi (X, y) poros (5 fragmentai, iš viso 
 
 | Užduotis | X (įvestis) | y (išvestis) | Pavyzdys |
 |---|---|---|---|
-| Kalbos atpažinimas (Whisper) | audio `.mp3` | transkripcija `.txt` | `data/audio_data/1.mp3` → `data/text_data/1.txt` |
-| Paveikslėlio aprašymas (Gemini) | vidurinis kadras `.jpg` | aprašymas `.txt` | `data/frame_data/1.jpg` → `data/image_descriptions/1.txt` |
+| Kalbos atpažinimas (Whisper) | audio `.mp3` | transkripcija `.txt` | `nlp-video-multimodal-extraction/data/audio_data/1.mp3` → `nlp-video-multimodal-extraction/data/text_data/1.txt` |
+| Paveikslėlio aprašymas (Gemini) | vidurinis kadras `.jpg` | aprašymas `.txt` | `nlp-video-multimodal-extraction/data/frame_data/1.jpg` → `nlp-video-multimodal-extraction/data/image_descriptions/1.txt` |
 
 ### Testinis promptas (`prompts/`)
 [`prompts/test_prompt.md`](prompts/test_prompt.md) yra promptas, kurį įklijavus GPT agentui gaunamas atsakymas (JSON su santrauka, sąvokomis ir klausimais). Faile matosi ir promptas, ir gautas atsakymas.
@@ -180,11 +180,13 @@ sequenceDiagram
 Diagramos sugeneruotos su ChatGPT: [nuoroda į pokalbį](https://chatgpt.com/share/6abd695f-afa8-83ed-8629-2f338840403a). PlantUML ir Mermaid kodas yra `diagrams/` aplanke.
 
 ## Colab prototipas
-`lecture_assistant.ipynb`: paskaitos tekstas → garso įrašas (Gemini TTS) → transkripcija (Whisper) → analizė (Gemini API) → rezultatai ir grafikas → JSON failas.
+[`lecture_assistant.ipynb`](lecture_assistant.ipynb): paskaitos tekstas → garso įrašas (Gemini TTS) → transkripcija (Whisper) → analizė (Gemini API) → rezultatai ir grafikas → JSON failas.
 
 ---
 
 # B dalis: Multimodalinis duomenų išgavimas iš paskaitų video
+
+Visi B dalies failai yra aplanke [`nlp-video-multimodal-extraction/`](nlp-video-multimodal-extraction/).
 
 ## Procesas
 ```
@@ -194,8 +196,8 @@ Paskaitos video (.mp4, 1 min. fragmentas)
         │
         └──► vidurinis kadras (.jpg) ──► Gemini ──► aprašymas (.txt)
 ```
-1. `01_data_preparation.ipynb`: video fragmentai, audio (`moviepy`), transkripcija (Whisper), vidurinis kadras.
-2. `02_image_description.ipynb`: kadrų aprašymai per Gemini API.
+1. [`01_data_preparation.ipynb`](nlp-video-multimodal-extraction/01_data_preparation.ipynb): video fragmentai, audio (`moviepy`), transkripcija (Whisper), vidurinis kadras.
+2. [`02_image_description.ipynb`](nlp-video-multimodal-extraction/02_image_description.ipynb): kadrų aprašymai per Gemini API.
 
 Dėl laikinų Gemini serverių perkrovų (503) antrame notebook'e kodas kartoja užklausas ir, jei reikia, pereina prie atsarginių modelių, todėl skirtingi kadrai gali būti aprašyti skirtingais modeliais. Naudotas modelis matomas notebook'o išvestyje.
 
@@ -213,19 +215,23 @@ B dalies failai (video fragmentai, audio, kadrai, transkripcijos, aprašymai) yr
 ## Repozitorijos struktūra
 ```
 ├── README.md
-├── lecture_assistant.ipynb      # A dalis: Colab prototipas (Gemini API)
-├── 01_data_preparation.ipynb    # B dalis: duomenų paruošimas iš video
-├── 02_image_description.ipynb   # B dalis: paveikslėlių aprašymai
-├── chatgpt/                     # ChatGPT pokalbis
-├── diagrams/                    # PlantUML ir Mermaid kodas
-├── prompts/                     # testinis promptas
-└── data/
-    ├── lecture1-3_input.txt, lecture1-3_output.json   # A dalis: 3 (X, y) poros
-    ├── video_data/              # B dalis: 5 video fragmentai (.mp4)
-    ├── audio_data/              # X: garso failai (.mp3)
-    ├── text_data/               # y: Whisper transkripcijos (.txt)
-    ├── frame_data/              # X: vidurinių kadrų paveikslėliai (.jpg)
-    └── image_descriptions/      # y: Gemini aprašymai (.txt)
+├── lecture_assistant.ipynb          # A dalis: Colab prototipas (Gemini API)
+├── chatgpt/                         # A dalis: ChatGPT pokalbis
+├── diagrams/                        # A dalis: PlantUML ir Mermaid kodas
+├── prompts/                         # A dalis: testinis promptas
+├── data/                            # A dalis: 3 (X, y) poros
+│   ├── lecture1_input.txt, lecture1_output.json
+│   ├── lecture2_input.txt, lecture2_output.json
+│   └── lecture3_input.txt, lecture3_output.json
+└── nlp-video-multimodal-extraction/ # B dalis
+    ├── 01_data_preparation.ipynb
+    ├── 02_image_description.ipynb
+    └── data/
+        ├── video_data/              # 5 video fragmentai (.mp4)
+        ├── audio_data/              # X: garso failai (.mp3)
+        ├── text_data/               # y: Whisper transkripcijos (.txt)
+        ├── frame_data/              # X: vidurinių kadrų paveikslėliai (.jpg)
+        └── image_descriptions/      # y: Gemini aprašymai (.txt)
 ```
 
 ## Kaip paleisti
