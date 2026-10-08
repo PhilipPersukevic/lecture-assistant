@@ -1,0 +1,1 @@
+Paveikslėlyje pavaizduota mokomoji skaidrė apie simbolių eilutes (angl. *strings*) programavimo kalboje Python. Joje pateikiami pagrindiniai principai: kaip apibrėžti eilutes naudojant kabutes, jas sujungti (jungtinė operacija) ir atlikti kitas matematines operacijas. Skaidrės apačioje matomas trumpas tekstas ir kodas, nurodantis paskaitos numerį bei puslapį.
